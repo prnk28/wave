@@ -1,0 +1,25 @@
+version: '3'
+silent: true
+
+vars:
+  ROOT_DIR:
+    sh: git rev-parse --show-toplevel
+  WAVE_DIR:
+    sh: echo $HOME/.local/share/wave
+
+includes:
+  bun: "{{.WAVE_DIR}}/templates/Taskfile.bun.yml"
+  conv: "{{.WAVE_DIR}}/templates/Taskfile.pkl.yml"
+  docker: "{{.WAVE_DIR}}/templates/Taskfile.docker.yml"
+  go: "{{.WAVE_DIR}}/templates/Taskfile.go.yml"
+  log: "{{.WAVE_DIR}}/templates/Taskfile.log.yml"
+  dev: 
+    taskfile: "{{.ROOT_DIR}}/.taskfiles/Dev.yml"
+    flatten: true
+    dir: .
+
+tasks:
+  default:
+    cmds:
+      - task -l
+    silent: true

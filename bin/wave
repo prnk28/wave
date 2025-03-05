@@ -1,0 +1,18 @@
+#!/bin/bash
+
+set -e
+
+# Define the taskfile content
+taskfile=$(cat ~/.local/share/wave/Taskfile.yml)
+
+root_dir=$(git rev-parse --show-toplevel)
+cd $root_dir
+
+# Check if an argument was provided
+if [ $# -gt 0 ]; then
+    # Run task with the provided argument
+    echo "$taskfile" | task -t - "$@"
+else
+    # Run task without arguments (default behavior)
+    echo "$taskfile" | task -t -
+fi
